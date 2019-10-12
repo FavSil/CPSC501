@@ -18,6 +18,22 @@ public class Blackjack {
         output.showDealerFirstCard(dealer);
 	}
 	
+	public static void blackJackCheck(Output output, Guest guest, Dealer dealer){
+        if (guest.hasBlackJack(1) && dealer.hasBlackJack(1)) {
+            output.userBlackJack();
+            output.dealerBlackJack();
+            output.push();
+            guest.push();
+        } else if (guest.hasBlackJack(1)) {
+            guest.blackJack();
+            output.userBlackJack();
+            output.win();
+        } else if (dealer.hasBlackJack(1)) {
+            output.dealerBlackJack();
+            output.lose();
+        }
+	}
+	
 	public static void main(String[] args) {
 
 	    Output output = new Output();
@@ -47,19 +63,10 @@ public class Blackjack {
 	                }
 	            }
 	        }
-	        if (guest.hasBlackJack(1) && dealer.hasBlackJack(1)) {
-	            output.userBlackJack();
-	            output.dealerBlackJack();
-	            output.push();
-	            guest.push();
-	        } else if (guest.hasBlackJack(1)) {
-	            guest.blackJack();
-	            output.userBlackJack();
-	            output.win();
-	        } else if (dealer.hasBlackJack(1)) {
-	            output.dealerBlackJack();
-	            output.lose();
-	        } else {
+	        
+	        blackJackCheck(output,guest,dealer);
+	        
+	         {
 	            if (2 * guest.getBet() < guest.getCash()) {
 	                output.askDoubleDown();
 	                if (input.choiceIsYes()) {
