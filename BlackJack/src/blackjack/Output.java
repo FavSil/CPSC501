@@ -1,7 +1,6 @@
-package Blackjack;
+package blackjack;
 
-
-class Output {
+public class Output {
 
 Output(){
 }

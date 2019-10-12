@@ -1,9 +1,25 @@
-package Blackjack;
+package blackjack;
 
 import java.util.*;
 
 public class Blackjack {
+	
+	public static void dealHands(Deck deck, Guest guest, Output output, Dealer dealer, Input input){
+        deck.shuffle();
+        guest.getNewHand(deck);
+        dealer.getNewHand(deck);
+        output.showCash(guest.getCash());
+        output.askBet();
+        guest.setBet(input.getBet(guest.getCash()));
+        guest.setCash(guest.getCash() - guest.getBet());
+        output.showCash(guest.getCash());
+        output.showBet(guest.getBet());
+        output.showHand(guest);
+        output.showDealerFirstCard(dealer);
+	}
+	
 	public static void main(String[] args) {
+
 	    Output output = new Output();
 	    Input input = new Input(output);
 	    output.askName();
@@ -12,19 +28,12 @@ public class Blackjack {
 	    Guest guest = new Guest();
 	    Dealer dealer = new Dealer();
 	    guest.setCash(input.getCash());
+		
 	    while (guest.getCash() > 0) {
 	        Deck deck = new Deck();
-	        deck.shuffle();
-	        guest.getNewHand(deck);
-	        dealer.getNewHand(deck);
-	        output.showCash(guest.getCash());
-	        output.askBet();
-	        guest.setBet(input.getBet(guest.getCash()));
-	        guest.setCash(guest.getCash() - guest.getBet());
-	        output.showCash(guest.getCash());
-	        output.showBet(guest.getBet());
-	        output.showHand(guest);
-	        output.showDealerFirstCard(dealer);
+	        
+	        dealHands(deck,guest,output,dealer, input);
+	        
 	        if (dealer.getHand(1).getCard(1).getRank() == 1) {
 	            output.insurance();
 	            if (input.choiceIsYes()) {

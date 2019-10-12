@@ -1,11 +1,16 @@
-package Blackjack;
+package blackjack;
 
 
 import java.util.Scanner;
 
-class Input {
-private Output outputter;
-Input(Output outputs) {
+public class Input {
+
+	
+	private Output outputter;
+
+	
+	
+	Input(Output outputs) {
     outputs = outputter;
 }
 
