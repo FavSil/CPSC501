@@ -14,7 +14,7 @@ Guest() {
 
 public int getCash() {
     return cash;
-}
+} 
 
 public int getBet() {
     return bet;
